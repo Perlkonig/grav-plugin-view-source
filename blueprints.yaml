@@ -1,0 +1,27 @@
+name: View Source
+version: 1.0.0
+description: Allows you to display the raw header and Markdown for a given page
+icon: eye
+author:
+  name: Aaron Dalton
+  email: aaron@daltons.ca
+homepage: https://github.com/perlkonig/grav-plugin-view-source
+demo: http://perlkonig.com/demos
+keywords: grav, plugin, markdown, view, source
+bugs: https://github.com/perlkonig/grav-plugin-view-source/issues
+docs: https://github.com/perlkonig/grav-plugin-view-source/blob/master/README.md
+license: MIT
+
+form:
+  validation: strict
+  fields:
+    enabled:
+      type: toggle
+      label: Plugin status
+      highlight: 1
+      default: 0
+      options:
+        1: Enabled
+        0: Disabled
+      validate:
+        type: bool
