@@ -48,6 +48,8 @@ body_interpolated: true
 
 Once enabled, each page view is examined for a query string that contains the parameter `view-source`. If found and set to `interpolated` (e.g., `http://example.com/blog/post?view-source=interpolated`), then the mode is set to `interpolated`. Any other setting (including blank) will result in the mode being set to `original` (e.g., `http://example.com/blog/post?view-source=`).
 
+The plugin will then return a `200 OK` response with a `Content Type` header of `text/plain` and the body containing the source code as described below.
+
 ### Original Mode
 
 The returned header will be the front matter as it appears in the original Markdown file. 
