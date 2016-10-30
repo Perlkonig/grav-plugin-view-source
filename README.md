@@ -44,6 +44,16 @@ body_interpolated: true
 
 * The `header_interpolated` and `body_interpolated` let the user view the header and body after being processed by the various plugins. If `header` or `body` are set to false, then the accompanying `*_interpolated` is automatically set to false as well.
 
+You can enable/disable permissions on a page-by-page basis by inserting something like the following in the front matter of the page in question:
+
+```yaml
+view-source:
+  header: false
+  body: false
+```
+
+This would fully disable viewing the source of that specific page. You can do this by taxonomy also by using the [Header by Taxonomy plugin](https://github.com/Perlkonig/grav-plugin-header-by-taxonomy).
+
 ## Usage
 
 Once enabled, each page view is examined for a query string that contains the parameter `view-source`. If found and set to `interpolated` (e.g., `http://example.com/blog/post?view-source=interpolated`), then the mode is set to `interpolated`. Any other setting (including blank) will result in the mode being set to `original` (e.g., `http://example.com/blog/post?view-source=`).
