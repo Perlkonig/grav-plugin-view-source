@@ -1,8 +1,6 @@
 # View Source Plugin
 
-**This README.md file should be modified to describe the features, installation, configuration, and general usage of this plugin.**
-
-The **View Source** Plugin is for [Grav CMS](http://github.com/getgrav/grav). Allows you to display the raw header and Markdown for a given page
+The **View Source** Plugin is for [Grav CMS](http://github.com/getgrav/grav) and allows you to display the raw header and Markdown for a given page
 
 ## Installation
 
@@ -34,17 +32,31 @@ Here is the default configuration and an explanation of available options:
 
 ```yaml
 enabled: true
+header: true
+header_interpolated: true
+body: true
+body_interpolated: true
 ```
+
+* `enabled` lets you turn the plugin off entirely.
+
+* The `header` and `body` fields tell the plugin which parts of the page users are allowed to view. If these are set to false, then the plugin returns a `403 FORBIDDEN` when the source is requested.
+
+* The `header_interpolated` and `body_interpolated` let the user view the header and body after being processed by the various plugins. If `header` or `body` are set to false, then the accompanying `*_interpolated` is automatically set to false as well.
 
 ## Usage
 
-**Describe how to use the plugin.**
+Once enabled, each page view is examined for a query string that contains the parameter `view-source`. If found and set to `interpolated` (e.g., `http://example.com/blog/post?view-source=interpolated`), then the mode is set to `interpolated`. Any other setting (including blank) will result in the mode being set to `original` (e.g., `http://example.com/blog/post?view-source=`).
 
-## Credits
+### Original Mode
 
-**Did you incorporate third-party code? Want to thank somebody?**
+The returned header will be the front matter as it appears in the original Markdown file. 
 
-## To Do
+The body will be the Markdown itself as it appears in the original Markdown file.
 
-- [ ] Future plans, if any
+### Interpolated Mode
+
+The returned header will be a YAML dump of the page's header (which can be modified in various ways by plugins). 
+
+The returned body will be the Markdown after any other Markdown-editing plugins are run. But you'll still get the Markdown itself, not HTML.
 
