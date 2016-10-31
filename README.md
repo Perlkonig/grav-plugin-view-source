@@ -70,5 +70,7 @@ The body will be the Markdown itself as it appears in the original Markdown file
 
 The returned header will be a YAML dump of the page's header (which can be modified in various ways by plugins). 
 
-The returned body will be the Markdown after any other Markdown-editing plugins are run. But you'll still get the Markdown itself, not HTML.
+~~The returned body will be the Markdown after any other Markdown-editing plugins are run. But you'll still get the Markdown itself, not HTML.~~
+
+Actually, this is not reliably possible at this time because of how the Grav lifecycle works. As it stands, the body will usually be the final HTML. For this reason, the `interpolated` mode has little value.
 
