@@ -11,6 +11,9 @@ use Symfony\Component\Yaml\Yaml;
  */
 class ViewSourcePlugin extends Plugin
 {
+
+    protected $intermediate = null;
+
     /**
      * @return array
      *
@@ -40,8 +43,13 @@ class ViewSourcePlugin extends Plugin
 
         // Enable the main event we are interested in
         $this->enable([
+            'onPageContentRaw' => ['onPageContentRaw', -1000],
             'onOutputGenerated' => ['onOutputGenerated', -100]
         ]);
+    }
+
+    public function onPageContentRaw(Event $e) {
+        $this->intermediate = $this->grav['page']->content();
     }
 
     public function onOutputGenerated(Event $e) {
@@ -82,7 +90,7 @@ class ViewSourcePlugin extends Plugin
             $content .= "\n---\n\n";
 
             if ( ($format === 'interpolated') && ($this->config->get('plugins.view-source.body', false)) && ($this->config->get('plugins.view-source.body_interpolated', false)) ) {
-                $content .= $page->content();
+                $content .= $this->intermediate;
             } elseif ($this->config->get('plugins.view-source.body', false)) {
                 $content .= $page->file()->markdown();
             }
