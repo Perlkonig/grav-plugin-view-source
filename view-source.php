@@ -90,7 +90,11 @@ class ViewSourcePlugin extends Plugin
             $content .= "\n---\n\n";
 
             if ( ($format === 'interpolated') && ($this->config->get('plugins.view-source.body', false)) && ($this->config->get('plugins.view-source.body_interpolated', false)) ) {
-                $content .= $this->intermediate;
+                if ( ($this->intermediate !== null) && (strlen($this->intermediate) > 0) ) {
+                    $content .= $this->intermediate;
+                } else {
+                    $content .= $page->file()->markdown();    
+                }
             } elseif ($this->config->get('plugins.view-source.body', false)) {
                 $content .= $page->file()->markdown();
             }
